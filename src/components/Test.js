@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-
+import { Space, Row, Col, Badge, Card, Input, Button } from 'antd';
 function Test() {
     const [블록데이터, set블록데이터] = useState("")    //생성데이터
     const [peer, setPeer] = useState("")    //생성데이터
-    const [peers, setPeers] = useState("")    //생성데이터
+    const [peers, setPeers] = useState(" ")    //생성데이터
     const [Wallet, setWallet] = useState([])
     const [chainBlocks, setChainBlocks] = useState([])    //db불러온거
+    const reverse = [...chainBlocks].reverse();         //배열뒤집어주기
 
     const bcMaker = async () => {
         const data = 블록데이터
@@ -35,12 +36,11 @@ function Test() {
 
 
     const getpeers = async () => {
-        await axios.get(`http://localhost:3001/peers`)
+        axios.get(`http://localhost:3001/peers`)
             .then(req => setPeers(req.data))
-
-        if (peers.length === 0) {
-            return alert(`연결된 피어가없어요`);
-        }
+    }
+    if (peers.length === 0) {
+        return setPeers(`연결된 피어가없어요`);
     }
 
     const addPeers = async () => {
@@ -64,35 +64,56 @@ function Test() {
     };
 
     return (
-        <div>
-            <button onClick={address} >지갑얍</button> <button onClick={stop} >서버종료</button> <br />
+        <div >
+            <Row>
+                <Col span={24}>   <h1>3001포트 WS6001입니다.</h1></Col>
+            </Row>
+            <br />
+            {/* <button onClick={address} >지갑얍</button> <button onClick={stop} >서버종료</button> <br />
             <p> < b>지갑 : </b> {Wallet}</p>
-
-            <input type="text" onChange={(e) => { setPeer(e.target.value) }} value={peer} /> <br />
-            <button onClick={addPeers} >피어연결</button> <br />
-            <button onClick={getpeers}>피어 연결목록확인</button> <br />
-            <p> < b>peers :  </b> {peers}</p>
-            <input type="text" onChange={(e) => { set블록데이터(e.target.value) }} value={블록데이터} /> <br />
-            <button onClick={bcMaker} >블록만들기 얍~</button> <br />
-            <button onClick={connect}  >블록체인 목록 불러오기</button> <br />
+             */}
+            <Col span={20}>
+                <Input addonBefore="ws://localhost:" placeholder=" ex)6001 " onChange={(e) => { setPeer(e.target.value) }} value={peer} />
+            </Col>
+            <Button style={{ marginTop: 5, }} type="dashed" onClick={addPeers}>피어연결</Button>
+            <Button style={{ marginLeft: 30, }} type="dashed" onClick={getpeers}>피어 연결목록확인</Button>
+            <p> < b style={{ marginLeft: 10, }} > peers :  </b> {peers}</p>
+            <Col style={{ marginTop: 50, }} span={20}>
+                <Input placeholder="블록내용을 입력해주세요" type="text" onChange={(e) => { set블록데이터(e.target.value) }} value={블록데이터} />
+            </Col>
+            <Button style={{ marginTop: 5, marginBottom: 10 }} type="dashed" onClick={bcMaker}>블록만들기 얍~</Button>
+            <Button style={{ marginLeft: 30, }} type="dashed" onClick={connect}>블록체인 목록 불러오기</Button>
 
             {
-                chainBlocks.map((a) => {
+                reverse.map((a) => {
                     return (
                         < ul >
-                            <h4 style={{ mouse: "pointer" }} onClick={() => { toggleComment(a) }} >{a.header.index}번째   BODY:{a.body[0]} </h4>
+                            <h4 style={{ mouse: "pointer" }} onClick={() => { toggleComment(a) }} >
+                                <Col span={20}>
+                                    <Badge.Ribbon text="Block Chain">
+                                        <Card size="small">
+                                            {a.header.index}번 블록    Body내용:{a.body}
+                                        </Card>
+                                    </Badge.Ribbon>
+                                </Col>
+                            </h4>
+
                             {shownBlock[a.header.index] ? (
-                                <li> 정보
-                                    < li > index : {a.header.index} </li>
-                                    <li > previousHash : {a.header.previousHash} </li>
-                                    <li > timestamp : {a.header.timestamp} </li>
-                                    <li > merkleRoot : {a.header.merkleRoot} </li>
-                                    <li > difficulty : {a.header.difficulty} </li>
-                                    <li > nonce : {a.header.nonce} </li>
-                                </li >
+                                <Col span={20}>
+                                    <Row justify="end">
+                                        <Col span={23}>
+                                            <Card size="small" title="정보">
+                                                <li> index : {a.header.index} </li>
+                                                <li> previousHash : {a.header.previousHash} </li>
+                                                <li> timestamp : {a.header.timestamp} </li>
+                                                <li> merkleRoot : {a.header.merkleRoot} </li>
+                                                <li> difficulty : {a.header.difficulty} </li>
+                                                <li> nonce : {a.header.nonce} </li>
+                                            </Card>
+                                        </Col>
+                                    </Row>
+                                </Col>
                             ) : null}
-
-
                         </ul >
                     )
                 })

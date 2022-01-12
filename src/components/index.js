@@ -6,3 +6,6 @@ export { default as News } from './News';
 export { default as Wallet } from './Wallet';
 export { default as Homepage } from './Homepage';
 export { default as Test } from './Test';
+
+export { default as BlockStatus } from './BlockStatus';
+export { default as CreateWallet } from './createWallet';

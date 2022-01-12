@@ -1,7 +1,8 @@
 import React from 'react';
 import millify from 'millify';
-import { Typography, Row, Col, Statistic } from 'antd';
+import { Typography, Row, Col, Statistic, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import { PoweroffOutlined } from '@ant-design/icons';
 
 import { useGetCryptosQuery } from '../services/cryptoApi';
 import Cryptocurrencies from './Cryptocurrencies';
@@ -18,6 +19,12 @@ const Homepage = () => {
 
   return (
     <>
+      <Button style={{ position: 'fixed', left: '1600px' }}
+        type="primary"
+        icon={<PoweroffOutlined />}
+        link="./wallet">
+        지갑 연결하기
+      </Button>
       <Title level={2} className="heading">세계 가상화폐 현황</Title>
       <Row gutter={[32, 32]}>
         <Col span={12}><Statistic title="Total Cryptocurrencies" value={globalStats.total} /></Col>
@@ -32,11 +39,11 @@ const Homepage = () => {
         <Title level={3} className="show-more"><Link to="/cryptocurrencies">Show more</Link></Title>
       </div>
       <Cryptocurrencies simplified />
-      {/* <div className="home-heading-container">
+      <div className="home-heading-container">
         <Title level={2} className="home-title">최근 코인 뉴스</Title>
         <Title level={3}><Link to="/news">Show more</Link></Title>
       </div>
-      <News simplified /> */}
+      <News simplified />
     </>
   );
 };

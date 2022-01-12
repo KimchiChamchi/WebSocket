@@ -1,16 +1,14 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import { Layout, Typography, Space } from 'antd';
+import { Layout, Typography, Space,  } from 'antd';
 
-import { Wallet, Homepage, News, Cryptocurrencies, CryptoDetails, Navbar, Test } from './components';
+import { Wallet, CreateWallet, Homepage, News, Cryptocurrencies, CryptoDetails, Navbar, Test } from './components';
 import './App.css';
+import BlockStatus from './components/BlockStatus';
 
 const App = () => (
   <div className="app">
-
-    <Test />
-
-    {/* <div className="navbar">
+    <div className="navbar">
       <Navbar />
     </div>
     <div className="main">
@@ -23,6 +21,9 @@ const App = () => (
             <Route exact path="/wallet">
               <Wallet />
             </Route>
+            <Route exact path="/createwallet">
+              <CreateWallet />
+            </Route>
             <Route exact path="/cryptocurrencies">
               <Cryptocurrencies />
             </Route>
@@ -31,6 +32,21 @@ const App = () => (
             </Route>
             <Route exact path="/news">
               <News />
+            </Route>
+            <Route exact path="/blockstatus">
+              <BlockStatus />
+            </Route>
+            <Route path="/port1" component={Test} exact={true}>
+              <Test />
+            </Route>
+            <Route exact path="/por2">
+              <News />
+            </Route>
+            <Route exact path="/por3">
+              <News />
+            </Route>
+            <Route exact path="/blockstatus">
+              <BlockStatus />
             </Route>
           </Switch>
         </div>
@@ -48,7 +64,7 @@ const App = () => (
           <Link to="/news">News</Link>
         </Space>
       </div>
-    </div> */}
+    </div>
   </div>
 );
 
