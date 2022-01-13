@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import { Layout, Typography, Space,  } from 'antd';
+import { Layout, Typography, Space, } from 'antd';
 
-import { Wallet, CreateWallet, Homepage, News, Cryptocurrencies, CryptoDetails, Navbar, Test } from './components';
+import { Wallet, CreateWallet, Homepage, News, Cryptocurrencies, CryptoDetails, Navbar, Test, Port2, Port3 } from './components';
 import './App.css';
 import BlockStatus from './components/BlockStatus';
 
@@ -39,11 +39,11 @@ const App = () => (
             <Route path="/port1" component={Test} exact={true}>
               <Test />
             </Route>
-            <Route exact path="/por2">
-              <News />
+            <Route exact path="/port2" component={Port2} exact={true}>
+              <Port2 />
             </Route>
-            <Route exact path="/por3">
-              <News />
+            <Route exact path="/port3" component={Port3} exact={true}>
+              <Port3 />
             </Route>
             <Route exact path="/blockstatus">
               <BlockStatus />

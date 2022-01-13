@@ -15,28 +15,28 @@ function Test() {
         if (data.length === 0) {    //데이터없으면 리네임
             return alert(`데이터를 넣어주세용`);
         }
-        await axios.post(`http://localhost:3001/mineBlock`, { data: [data] })
+        await axios.post(`http://localhost:3003/mineBlock`, { data: [data] })
             .then(req => alert(req.data))
     }
 
     const connect = async () => {
-        await axios.get(`http://localhost:3001/Blocks`)
+        await axios.get(`http://localhost:3003/Blocks`)
             .then(req => setChainBlocks(req.data))
     }
 
     const address = async () => {
-        await axios.get(`http://localhost:3001/address`)
+        await axios.get(`http://localhost:3003/address`)
             .then(req => setWallet(req.data.address))
         console.log(Wallet)
     }
     const stop = async () => {
-        await axios.post(`http://localhost:3001/stop`)
+        await axios.post(`http://localhost:3003/stop`)
             .then(req => alert(req.data))
     }
 
 
     const getpeers = async () => {
-        axios.get(`http://localhost:3001/peers`)
+        axios.get(`http://localhost:3003/peers`)
             .then(req => setPeers(req.data))
     }
     if (peers.length === 0) {
@@ -48,7 +48,7 @@ function Test() {
         if (P.length === 0) {    //데이터없으면 리네임
             return alert(`peer내용을 넣어주세용`);
         }
-        await axios.post(`http://localhost:3001/addPeers`, { peers: [`ws://localhost:${P}`] })
+        await axios.post(`http://localhost:3003/addPeers`, { peers: [`ws://localhost:${P}`] })
             .then(req => alert(req.data))
     }
     const [shownBlock, setshownBlock] = useState({});
@@ -67,10 +67,10 @@ function Test() {
     const [ok, setOk] = useState(false);
 
     useInterval(() => {
-        const data = 블록데이터 || '1번채굴기입니다.'
+        const data = 블록데이터 || '3번채굴기입니다.'
         setIsRunning(false)
         console.log("데이터전송")
-        axios.post(`http://localhost:3001/mineBlock`, { data: [data] })
+        axios.post(`http://localhost:3003/mineBlock`, { data: [data] })
             .then((req) => {
                 console.log(req.data); setIsRunning(true);
             })
@@ -86,7 +86,7 @@ function Test() {
     return (
         <div >
             <Row>
-                <Col span={24}>   <h1>3001포트 WS6001입니다.</h1></Col>
+                <Col span={24}>   <h1>3003포트 WS6001입니다.</h1></Col>
             </Row>
             <br />
             <Button style={{ marginTop: 5, }} type="dashed" onClick={address}>지갑확인</Button>

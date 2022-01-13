@@ -45,23 +45,23 @@ const Navbar = () => {
           <Menu.Item icon={<BulbOutlined />}>
             <Link to="/news">뉴스</Link>
           </Menu.Item>
-          <Menu.Item icon={<WalletOutlined />}>
+          {/* <Menu.Item icon={<WalletOutlined />}>
             <Link to="/wallet">지갑</Link>
           </Menu.Item>
           <Menu.Item icon={<MoneyCollectOutlined />}>
             <Link to="/createwallet">지갑 생성하기</Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item icon={<BlockOutlined />}>
             <Link to="/blockstatus">블록 현황</Link>
           </Menu.Item>
           <Menu.Item icon={<NodeCollapseOutlined />}>
-            <Link to="/port1">Server 3001, WS6001</Link>
+            <Link to="/port1">노드1 관훈블록</Link>
           </Menu.Item>
           <Menu.Item icon={<NodeCollapseOutlined />}>
-            <Link to="/port2">Server 3002, WS6002</Link>
+            <Link to="/port2">노드2 철순블록</Link>
           </Menu.Item>
           <Menu.Item icon={<NodeCollapseOutlined />}>
-            <Link to="/port3">Server 3003, WS6003</Link>
+            <Link to="/port3">노드3 상민블록</Link>
           </Menu.Item>
         </Menu>
       )}
