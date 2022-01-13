@@ -172,12 +172,12 @@ function getCurrentTimestamp() {        //검증자의 시간
 }
 
 function isValidTimestamp(newBlock, prevBlock) {        //시간이 너무빠르거나 너무느리게만들어자면 체인에 추가안함
-    if (newBlock.header.timestamp - prevBlock.header.timestamp < 1) //60초전에 블럭이 생성되면 false
-        return false
-    if (getCurrentTimestamp() - newBlock.header.timestamp > 60000000)     //지금시간이랑 새로생성된 블럭시간이 1분넘어가면 false
-        return false
+    if (newBlock.header.timestamp < prevBlock.header.timestamp - 60) //60초전에 블럭이 생성되면 false
+        return true
+    if (getCurrentTimestamp() > newBlock.header.timestamp - 60)     //지금시간이랑 새로생성된 블럭시간이 1분넘어가면 false
+        return true
 
-    return true
+    return false
 }
 
 async function replaceChain(newBlocks) {          //블럭을바꿔줄꺼임

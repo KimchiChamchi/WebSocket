@@ -11,12 +11,11 @@ function Test() {
 
     const bcMaker = async () => {
         const data = 블록데이터
-        console.log(data.length)
         if (data.length === 0) {    //데이터없으면 리네임
             return alert(`데이터를 넣어주세용`);
         }
         await axios.post(`http://localhost:3001/mineBlock`, { data: [data] })
-            .then(req => console.log(req.data))
+            .then(req => alert(req.data))
     }
 
     const connect = async () => {
@@ -45,11 +44,11 @@ function Test() {
 
     const addPeers = async () => {
         const P = peer
-        if (P.length === []) {    //데이터없으면 리네임
+        if (P.length === 0) {    //데이터없으면 리네임
             return alert(`peer내용을 넣어주세용`);
         }
         await axios.post(`http://localhost:3001/addPeers`, { peers: [`ws://localhost:${P}`] })
-            .then(req => console.log(req.data))
+            .then(req => alert(req.data))
     }
 
 
@@ -69,14 +68,15 @@ function Test() {
                 <Col span={24}>   <h1>3001포트 WS6001입니다.</h1></Col>
             </Row>
             <br />
-            {/* <button onClick={address} >지갑얍</button> <button onClick={stop} >서버종료</button> <br />
-            <p> < b>지갑 : </b> {Wallet}</p>
-             */}
+            <Button style={{ marginTop: 5, }} type="dashed" onClick={address}>지갑확인</Button>
+            {/* <Button style={{ marginLeft: 40, }} type="dashed" onClick={stop}>서버종료</Button> */}
+            <p style={{ marginLeft: 10, }}> < b >지갑 : </b> {Wallet}</p>
+
             <Col span={20}>
                 <Input addonBefore="ws://localhost:" placeholder=" ex)6001 " onChange={(e) => { setPeer(e.target.value) }} value={peer} />
             </Col>
             <Button style={{ marginTop: 5, }} type="dashed" onClick={addPeers}>피어연결</Button>
-            <Button style={{ marginLeft: 30, }} type="dashed" onClick={getpeers}>피어 연결목록확인</Button>
+            <Button style={{ marginLeft: 40, }} type="dashed" onClick={getpeers}>피어 연결목록확인</Button>
             <p> < b style={{ marginLeft: 10, }} > peers :  </b> {peers}</p>
             <Col style={{ marginTop: 50, }} span={20}>
                 <Input placeholder="블록내용을 입력해주세요" type="text" onChange={(e) => { set블록데이터(e.target.value) }} value={블록데이터} />

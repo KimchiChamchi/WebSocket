@@ -3,7 +3,7 @@
 // 이전 블록의 해시값과 현재 블록의 이전 해시가 같은지
 // 데이터 필드로부터 계산한 머클루트와 블록 헤더의 머클루트가 동일한지
 const merkle = require('merkle')
-const { createHash, Blocks, hashMatchesDifficulty } = require('./chainedBlock');        //전에만든 블록생성파일에서 블러와
+const { isValidTimestamp, createHash, Blocks, hashMatchesDifficulty } = require('./chainedBlock');        //전에만든 블록생성파일에서 블러와
 function isValidBlockStructure(block) {                     //블럭에 타입이 맞는지 확인하는 함수
     return typeof (block.header.version) === 'string'       //버전이 스트링인지
         && typeof (block.header.index) === 'number'         //그리고 넘버인지
@@ -34,10 +34,10 @@ function isValidNewBlock(newBlock, previousBlock) {                         //�
         console.log('invalid merkleRoot/머클루트가 잘못되었습니다.')
         return false;
     }
-    // else if (!isValidTimestamp(newBlock, previousBlock)) {      //생성시간이 전시간이랑 빠르거나 너무느릴때
-    //     console.log("invalid Timestamp/타임스템프 시간이 이상해요")
-    //     return false
-    // }
+    else if (!isValidTimestamp(newBlock, previousBlock)) {      //생성시간이 전시간이랑 빠르거나 너무느릴때
+        console.log("invalid Timestamp/타임스템프 시간이 이상해요")
+        return false
+    }
     else if (!hashMatchesDifficulty(createHash(newBlock), newBlock.header.difficulty)) { //할필요가있나? 왜있는지는 모르겠음
         console.log('invalid hash')
         return false

@@ -4,7 +4,7 @@ const bodyParser = require("body-parser")       //통신할때 JSON형태로 보
 const cors = require("cors")
 
 const { getBlocks, getVersion, checkAddBlock, nextBlock, dbBlockCheck, } = require('./chainedBlock');   //전에만든  블럭생성.js
-const { connectToPeers, getSockets, } = require("./p2pServer");
+const { getSockets, initConnection } = require("./p2pServer");
 const { getPublicKeyFromWallet, initWallet } = require("./encryption")
 
 const { sequelize } = require("./models");
@@ -33,9 +33,14 @@ function initHttpServer() {                 //총관리 함수
     //////p2p목록
     //curl -H "Content-type:application/json" --data "{\"data\" : [ \"ws://localhost:6002\", \"ws://localhost:6003\" ]}"
     app.post("/addPeers", (req, res) => {
+        const WebSocket = require("ws");
         const peers = req.body.peers || []
-        connectToPeers(peers)        //데이터를받으면 p2p해주는역활
-        res.send(peers);
+
+        const ws = new WebSocket(peers)
+        ws.on("open", () => { initConnection(ws), res.send("peer연결에 성공했습니다.") })    //열려있는서버에client sockets추가
+        ws.on("error", () => { res.send("peer연결에 실패했습니다.") })    //에러함수
+
+        // connectToPeers(peers)        //데이터를받으면 p2p해주는역활
     })
 
     app.get("/peers", (req, res) => {            //sokets목록불러오는거
@@ -45,6 +50,7 @@ function initHttpServer() {                 //총관리 함수
                 socketinfo.push(S._socket.remoteAddress + " : " + S._socket.remotePort)
             }
         )
+        console.log(socketinfo.length)
         res.send(socketinfo)
     })
     //p2p 연결끝
@@ -83,17 +89,18 @@ function initHttpServer() {                 //총관리 함수
     })
 
     app.post("/mineBlock", (req, res) => {  //블럭마이닝
-        console.log(req.body)
         const data = req.body.data || ['아무것도없어요']    //아무것도없으면
         const block = nextBlock(data)
         const { sockets, broadcast, responseLatestMsg } = require('./p2pServer')
 
         if (checkAddBlock(block)) {         //블록생성(유효성검사도) 참이면 db로넣어줌
-            res.send(getBlocks())
+            res.send("블록생성에 성공했습니다.")
+        } else {
+            res.send("블록등록에 실패했습니다")
         }
 
         if (sockets.length > 0) {           //연결된소켓이있으면 브로드케스트로 정보넘겨
-            console.log("새로생성한블럭 ws한테도 뿌링클")
+            console.log("새로생성한블럭 ws한테도 뿌링클1")
             broadcast(responseLatestMsg())
         }
 

@@ -40,16 +40,12 @@ function broadcast(message) {       //내가 연결된 모든 소켓한테 메�
     )
 }
 
-function connectToPeers(newPeers) {             //newPeers는 httpServer에서 배열로받음
-    newPeers.forEach(
-        (peer) => {               // ex) ws://localhost:6001  ws는 프로토콜! http를 대체함 
-            // new WebSocket.Server()서버를 여는거고 new WebSocket()열려있는서버를 사용하는거
-            const ws = new WebSocket(peer)
-            ws.on("open", () => { initConnection(ws); })    //열려있는서버에client sockets추가
-            ws.on("error", (errorType) => { console.log("connectiion Faled!" + errorType) })    //에러함수
-        }
-    )
-}
+// function connectToPeers(newPeers) {             //newPeers는 httpServer에서 배열로받음
+//     // new WebSocket.Server()서버를 여는거고 new WebSocket()열려있는서버를 사용하는거
+//     const ws = new WebSocket(newPeers)
+//     ws.on("open", () => { initConnection(ws); })    //열려있는서버에client sockets추가
+//     ws.on("error", (errorType) => { console.log("connectiion Faled!" + errorType);  })    //에러함수
+// }
 
 //Message Handler   
 const MessageType = {
@@ -154,4 +150,4 @@ function closeConnection(ws) {      //닫아주는 함수
 
 
 
-module.exports = { write, connectToPeers, getSockets, broadcast, responseLatestMsg, sockets, queryLatesmsg, }   //소켓 목록일아 소켓데이터 함수 export
+module.exports = { initConnection, write, getSockets, broadcast, responseLatestMsg, sockets, queryLatesmsg, }   //소켓 목록일아 소켓데이터 함수 export

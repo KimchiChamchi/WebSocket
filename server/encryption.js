@@ -2,7 +2,7 @@ const fs = require('fs')
 const ecdsa = require("elliptic")       //타원 곡선 디지털 서명 알고리즘
 const ec = new ecdsa.ec("secp256k1")
 
-const privateKeyLocation = "wallet/" + (process.env.PRIVATE_KEY || "default")   //wallet안에 "default"라는 폴더가 있는지 확인해본다. 없으면 만든다.
+const privateKeyLocation = "server/wallet/" + (process.env.PRIVATE_KEY || "default")   //wallet안에 "default"라는 폴더가 있는지 확인해본다. 없으면 만든다.
 const privateKeyFile = privateKeyLocation + "/private_key"                      //default라는 폴더 안에 파일이 있는지 확인해본다. 없으면 만든다.
 
 
@@ -12,8 +12,8 @@ function initWallet() {                         //암호화 파일 만드는 함
         console.log("기존 지갑 private key 경로 : " + privateKeyFile)
         return;
     }
-    if (!fs.existsSync('wallet/')) {            //wallet파일이없다면
-        fs.mkdirSync("wallet/")                 //파일만들고
+    if (!fs.existsSync('server/wallet/')) {            //wallet파일이없다면
+        fs.mkdirSync("server/wallet/")                 //파일만들고
     }
     if (!fs.existsSync(privateKeyLocation)) {   //wallet파일default파일이없다면 
         fs.mkdirSync(privateKeyLocation)        //default파일만들어 주고
