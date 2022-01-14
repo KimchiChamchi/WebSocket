@@ -437,3 +437,7 @@ a:hover {
   height: 1px;
   border: 0;
 }
+.auto_mine_box input {
+  width: 5rem;
+  font-size: 1rem;
+}
