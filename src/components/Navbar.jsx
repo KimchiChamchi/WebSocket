@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Menu, Typography, Avatar } from 'antd';
-import { Link } from 'react-router-dom';
-import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined, NodeCollapseOutlined, WalletOutlined, BlockOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
+import { Button, Menu, Typography, Avatar } from "antd";
+import { Link } from "react-router-dom";
+import {
+  HomeOutlined,
+  BulbOutlined,
+  FundOutlined,
+  MenuOutlined,
+  NodeCollapseOutlined,
+} from "@ant-design/icons";
 
-import icon from '../images/dp.png';
+import icon from "../images/dp.png";
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(true);
@@ -12,11 +18,11 @@ const Navbar = () => {
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -31,8 +37,15 @@ const Navbar = () => {
     <div className="nav-container">
       <div className="logo-container">
         <Avatar src={icon} size="large" />
-        <Typography.Title level={2} className="logo"><Link to="/">DASH PILL</Link></Typography.Title>
-        <Button className="menu-control-container" onClick={() => setActiveMenu(!activeMenu)}><MenuOutlined /></Button>
+        <Typography.Title level={2} className="logo">
+          <Link to="/">DASH PILL</Link>
+        </Typography.Title>
+        <Button
+          className="menu-control-container"
+          onClick={() => setActiveMenu(!activeMenu)}
+        >
+          <MenuOutlined />
+        </Button>
       </div>
       {activeMenu && (
         <Menu theme="dark">
@@ -44,15 +57,6 @@ const Navbar = () => {
           </Menu.Item>
           <Menu.Item icon={<BulbOutlined />}>
             <Link to="/news">뉴스</Link>
-          </Menu.Item>
-          {/* <Menu.Item icon={<WalletOutlined />}>
-            <Link to="/wallet">지갑</Link>
-          </Menu.Item>
-          <Menu.Item icon={<MoneyCollectOutlined />}>
-            <Link to="/createwallet">지갑 생성하기</Link>
-          </Menu.Item> */}
-          <Menu.Item icon={<BlockOutlined />}>
-            <Link to="/blockstatus">블록 현황</Link>
           </Menu.Item>
           <Menu.Item icon={<NodeCollapseOutlined />}>
             <Link to="/port1">노드1 관훈블록</Link>

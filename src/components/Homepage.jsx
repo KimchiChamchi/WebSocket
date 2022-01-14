@@ -1,13 +1,12 @@
-import React from 'react';
-import millify from 'millify';
-import { Typography, Row, Col, Statistic, Button } from 'antd';
-import { Link } from 'react-router-dom';
-import { PoweroffOutlined } from '@ant-design/icons';
+import React from "react";
+import millify from "millify";
+import { Typography, Row, Col, Statistic, Button } from "antd";
+import { Link } from "react-router-dom";
 
-import { useGetCryptosQuery } from '../services/cryptoApi';
-import Cryptocurrencies from './Cryptocurrencies';
-import News from './News';
-import Loader from './Loader';
+import { useGetCryptosQuery } from "../services/cryptoApi";
+import Cryptocurrencies from "./Cryptocurrencies";
+import News from "./News";
+import Loader from "./Loader";
 
 const { Title } = Typography;
 
@@ -19,29 +18,57 @@ const Homepage = () => {
 
   return (
     <>
-      <Button style={{ position: 'fixed', left: '1600px' }}
-        type="primary"
-        icon={<PoweroffOutlined />}
-        link="./wallet">
-        지갑 연결하기
-      </Button>
-      <Title level={2} className="heading">세계 가상화폐 현황</Title>
+      <Title level={2} className="heading">
+        세계 가상화폐 현황
+      </Title>
       <Row gutter={[32, 32]}>
-        <Col span={12}><Statistic title="Total Cryptocurrencies" value={globalStats.total} /></Col>
-        <Col span={12}><Statistic title="Total Exchanges" value={millify(globalStats.totalExchanges)} /></Col>
-        <Col span={12}><Statistic title="Total Market Cap:" value={`$${millify(globalStats.totalMarketCap)}`} /></Col>
-        <Col span={12}><Statistic title="Total 24h Volume" value={`$${millify(globalStats.total24hVolume)}`} /></Col>
-        <Col span={12}><Statistic title="Total Cryptocurrencies" value={globalStats.total} /></Col>
-        <Col span={12}><Statistic title="Total Markets" value={millify(globalStats.totalMarkets)} /></Col>
+        <Col span={12}>
+          <Statistic title="Total Cryptocurrencies" value={globalStats.total} />
+        </Col>
+        <Col span={12}>
+          <Statistic
+            title="Total Exchanges"
+            value={millify(globalStats.totalExchanges)}
+          />
+        </Col>
+        <Col span={12}>
+          <Statistic
+            title="Total Market Cap:"
+            value={`$${millify(globalStats.totalMarketCap)}`}
+          />
+        </Col>
+        <Col span={12}>
+          <Statistic
+            title="Total 24h Volume"
+            value={`$${millify(globalStats.total24hVolume)}`}
+          />
+        </Col>
+        <Col span={12}>
+          <Statistic title="Total Cryptocurrencies" value={globalStats.total} />
+        </Col>
+        <Col span={12}>
+          <Statistic
+            title="Total Markets"
+            value={millify(globalStats.totalMarkets)}
+          />
+        </Col>
       </Row>
       <div className="home-heading-container">
-        <Title level={2} className="home-title">세계 가상화폐 탑10</Title>
-        <Title level={3} className="show-more"><Link to="/cryptocurrencies">Show more</Link></Title>
+        <Title level={2} className="home-title">
+          세계 가상화폐 탑10
+        </Title>
+        <Title level={3} className="show-more">
+          <Link to="/cryptocurrencies">Show more</Link>
+        </Title>
       </div>
       <Cryptocurrencies simplified />
       <div className="home-heading-container">
-        <Title level={2} className="home-title">최근 코인 뉴스</Title>
-        <Title level={3}><Link to="/news">Show more</Link></Title>
+        <Title level={2} className="home-title">
+          최근 코인 뉴스
+        </Title>
+        <Title level={3}>
+          <Link to="/news">Show more</Link>
+        </Title>
       </div>
       <News simplified />
     </>

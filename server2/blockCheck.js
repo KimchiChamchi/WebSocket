@@ -6,7 +6,6 @@ const merkle = require("merkle");
 const {
   isValidTimestamp,
   createHash,
-  Blocks,
   hashMatchesDifficulty,
 } = require("./chainedBlock"); //전에만든 블록생성파일에서 블러와
 function isValidBlockStructure(block) {
