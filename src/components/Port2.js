@@ -176,14 +176,13 @@ function Port2() {
       >
         중지
       </Button>
-
-      <h1>자동 채굴양 {count}</h1>
-      <br />
-      <input value={delay} onChange={handleDelayChange} />
-
+      <div className="auto_mine_box">
+        <h1>자동 채굴양 {count}</h1>
+        <input value={delay} onChange={handleDelayChange} />
+      </div>
       {reverse.map((a) => {
         return (
-          <ul>
+          <ul key={a.header.index}>
             <h4
               style={{ mouse: "pointer" }}
               onClick={() => {
@@ -192,24 +191,71 @@ function Port2() {
             >
               <Col span={20}>
                 <Badge.Ribbon text="Block Chain">
-                  <Card size="small">
-                    {a.header.index}번 블록 Body내용:{a.body}
+                  <Card size="small" className="block_box">
+                    <div>{a.header.index}번</div>
+                    <div>{a.body}</div>
                   </Card>
                 </Badge.Ribbon>
               </Col>
             </h4>
 
             {shownBlock[a.header.index] ? (
-              <Col span={20}>
+              <Col span={19}>
                 <Row justify="end">
                   <Col span={23}>
-                    <Card size="small" title="정보">
-                      <li> index : {a.header.index} </li>
-                      <li> previousHash : {a.header.previousHash} </li>
-                      <li> timestamp : {a.header.timestamp} </li>
-                      <li> merkleRoot : {a.header.merkleRoot} </li>
-                      <li> difficulty : {a.header.difficulty} </li>
-                      <li> nonce : {a.header.nonce} </li>
+                    <Card
+                      size="small"
+                      title="정보"
+                      className="block_box-block_info"
+                    >
+                      <li>
+                        <div>
+                          <div>index</div>
+                        </div>
+                        <div>{a.header.index}</div>
+                      </li>
+                      <hr className="boundary_line"></hr>
+                      <li>
+                        <div>
+                          <div>previousHash</div>
+                        </div>
+                        <div>{a.header.previousHash}</div>
+                      </li>
+                      <hr className="boundary_line"></hr>
+                      <li>
+                        <div>
+                          <div>timestamp</div>
+                        </div>
+                        <div>{a.header.timestamp}</div>
+                      </li>
+                      <hr className="boundary_line"></hr>
+                      <li>
+                        <div>
+                          <div>merkleRoot</div>
+                        </div>
+                        <div>{a.header.merkleRoot}</div>
+                      </li>
+                      <hr className="boundary_line"></hr>
+                      <li>
+                        <div>
+                          <div>difficulty</div>
+                        </div>
+                        <div>{a.header.difficulty}</div>
+                      </li>
+                      <hr className="boundary_line"></hr>
+                      <li>
+                        <div>
+                          <div>nonce</div>
+                        </div>
+                        <div>{a.header.nonce}</div>
+                      </li>
+                      <hr className="boundary_line"></hr>
+                      <li>
+                        <div>
+                          <div>body</div>
+                        </div>
+                        <div>{a.body}</div>
+                      </li>
                     </Card>
                   </Col>
                 </Row>
