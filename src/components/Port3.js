@@ -183,24 +183,21 @@ function Port3() {
       {reverse.map((a) => {
         return (
           <ul key={a.header.index}>
-            <h4
-              style={{ mouse: "pointer" }}
+            <div
               onClick={() => {
                 toggleComment(a);
               }}
             >
-              <Col span={20}>
-                <Badge.Ribbon text="Block Chain">
-                  <Card size="small" className="block_box">
-                    <div>{a.header.index}번</div>
-                    <div>{a.body}</div>
-                  </Card>
-                </Badge.Ribbon>
-              </Col>
-            </h4>
+              <Badge.Ribbon text="Block Chain">
+                <Card size="small" className="block_box">
+                  <div>{a.header.index}번</div>
+                  <div>{a.body}</div>
+                </Card>
+              </Badge.Ribbon>
+            </div>
 
             {shownBlock[a.header.index] ? (
-              <Col span={19}>
+              <Col span={23}>
                 <Row justify="end">
                   <Col span={23}>
                     <Card
