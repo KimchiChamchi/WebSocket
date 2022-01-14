@@ -95,7 +95,7 @@ function Port1() {
   }
 
   return (
-    <div className="port_page">
+    <div>
       <Row>
         <Col span={24}>
           {" "}
@@ -107,11 +107,14 @@ function Port1() {
         지갑확인
       </Button>
       {/* <Button style={{ marginLeft: 40, }} type="dashed" onClick={stop}>서버종료</Button> */}
-      <p style={{ marginLeft: 10 }}>
-        {" "}
-        <b>지갑 : </b> {Wallet}
-      </p>
 
+      <div className="wallet_bublic_key_div">
+        <div className="wallet_bublic_key_div-title">
+          <b>지갑 : </b>
+        </div>
+        <div className="wallet_bublic_key_div-content">{Wallet}</div>
+      </div>
+      <hr className="boundary_line"></hr>
       <Col span={20}>
         <Input
           addonBefore="ws://localhost:"
@@ -132,7 +135,8 @@ function Port1() {
         {" "}
         <b style={{ marginLeft: 10 }}> peers : </b> {peers}
       </p>
-      <Col style={{ marginTop: 50 }} span={20}>
+      <hr className="boundary_line"></hr>
+      <Col span={20}>
         <Input
           placeholder="블록내용을 입력해주세요"
           type="text"

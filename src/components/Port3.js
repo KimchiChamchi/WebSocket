@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { Space, Row, Col, Badge, Card, Input, Button } from "antd";
 
-function Test() {
+function Port3() {
   const [블록데이터, set블록데이터] = useState(""); //생성데이터
   const [peer, setPeer] = useState(""); //생성데이터
   const [peers, setPeers] = useState(" "); //생성데이터
@@ -107,11 +107,14 @@ function Test() {
         지갑확인
       </Button>
       {/* <Button style={{ marginLeft: 40, }} type="dashed" onClick={stop}>서버종료</Button> */}
-      <p style={{ marginLeft: 10 }}>
-        {" "}
-        <b>지갑 : </b> {Wallet}
-      </p>
 
+      <div className="wallet_bublic_key_div">
+        <div className="wallet_bublic_key_div-title">
+          <b>지갑 : </b>
+        </div>
+        <div className="wallet_bublic_key_div-content">{Wallet}</div>
+      </div>
+      <hr className="boundary_line"></hr>
       <Col span={20}>
         <Input
           addonBefore="ws://localhost:"
@@ -132,7 +135,8 @@ function Test() {
         {" "}
         <b style={{ marginLeft: 10 }}> peers : </b> {peers}
       </p>
-      <Col style={{ marginTop: 50 }} span={20}>
+      <hr className="boundary_line"></hr>
+      <Col span={20}>
         <Input
           placeholder="블록내용을 입력해주세요"
           type="text"
@@ -237,4 +241,4 @@ function useInterval(callback, delay) {
   }, [delay]);
 }
 
-export default Test;
+export default Port3;
