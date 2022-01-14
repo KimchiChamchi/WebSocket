@@ -5,7 +5,7 @@
 /node_modules
 # /.pnp
 # .pnp.js
-/wallet
+wallet
 
 ### testing
 # /coverage
