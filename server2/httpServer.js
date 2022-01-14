@@ -1,6 +1,6 @@
 const http_port = process.env.HTTP_PORT || 3002; //환경변수에 env포트가 없으면 3001번으로 포트열어주셈
 const express = require("express"); //export열어줄때 사용 패키지
-const bodyParser = require("body-parser"); //통신할때 JSON형태로 보낼때 편하게 쓰는 패키지
+// const bodyParser = require("body-parser"); //통신할때 JSON형태로 보낼때 편하게 쓰는 패키지
 const cors = require("cors");
 
 const {
