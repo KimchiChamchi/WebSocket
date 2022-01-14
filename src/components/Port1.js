@@ -183,7 +183,7 @@ function Port1() {
 
       {reverse.map((a) => {
         return (
-          <ul>
+          <ul key={a.header.index}>
             <h4
               style={{ mouse: "pointer" }}
               onClick={() => {
